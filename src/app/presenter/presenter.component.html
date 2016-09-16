@@ -1,7 +1,10 @@
-<div class="container">
+<div class="container-fluid" (window:keyright)="right($event)" (window:keyleft)="left($event)">
     <div class="row">
       <div class="col-xs-12">
-        <h1>Here we display a PDF I guess</h1>
+        <pdf-viewer #pdfViewer [src]="'/example.pdf'" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
+        <div class="text-overlay">
+          <span>{{ currentText }}</span>
+        </div>
       </div>
     </div>
 </div>
