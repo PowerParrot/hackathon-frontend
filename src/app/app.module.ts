@@ -7,6 +7,7 @@ import { routing } from './app.routing';
 import { ExampleModule } from './example/example.module';
 import { StreamingModule } from './streaming/streaming.module';
 import { UploadModule } from './upload/upload.module';
+import { PresenterModule } from './presenter/presenter.module';
 
 import '../style/app.scss';
 
@@ -16,6 +17,7 @@ import '../style/app.scss';
    ExampleModule,
    StreamingModule,
    UploadModule,
+   PresenterModule,
    routing
  ],
  declarations: [
