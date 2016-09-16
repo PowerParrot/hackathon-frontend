@@ -1,9 +1,8 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <h1>Welcome!</h1>
-        <p>Your angular2-webpack-boilerplate is running.</p>
-        <button class="btn btn-primary">Upload PDF</button>
+        <h1>PDF Upload</h1>
+        <input type="file" ngFileSelect [options]="options" (onUpload)="handleUpload($event)">
       </div>
     </div>
 </div>
