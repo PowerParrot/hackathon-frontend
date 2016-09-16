@@ -2,10 +2,11 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { UploadComponent } from './upload/upload.component';
 import { routing } from './app.routing';
 
 import { ExampleModule } from './example/example.module';
+import { StreamingModule } from './streaming/streaming.module';
 
 import '../style/app.scss';
 
@@ -13,11 +14,12 @@ import '../style/app.scss';
  imports: [
    BrowserModule,
    ExampleModule,
+   StreamingModule,
    routing
  ],
  declarations: [
    AppComponent,
-   WelcomeComponent
+   UploadComponent
  ],
  bootstrap: [
    AppComponent

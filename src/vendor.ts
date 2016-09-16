@@ -6,6 +6,9 @@ import '@angular/common';
 import '@angular/http';
 import '@angular/router';
 
+// PDF.js
+import 'pdfjs-dist';
+
 // RxJS
 import 'rxjs';
 
