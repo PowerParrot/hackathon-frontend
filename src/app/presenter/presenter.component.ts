@@ -21,10 +21,12 @@ export class PresenterComponent {
     previous() {
         if (this.page <= 1) this.page = 1;
         else this.page--;
+        this._socketService.write('pagechange', { current_page: this.page, presentation_id: this.presentationId });
     }
 
     next() {
         this.page++;
+        this._socketService.write('pagechange', { current_page: this.page, presentation_id: this.presentationId });
     }
 
     @ViewChild('pdfViewer') pdfViewer: any;
