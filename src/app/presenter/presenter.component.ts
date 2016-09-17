@@ -17,6 +17,7 @@ export class PresenterComponent {
     page: number = 1;
     presentationId: string;
     documentPath: string;
+    activeLanguage: string;
 
     isRecording: boolean = false;
 
@@ -126,5 +127,7 @@ export class PresenterComponent {
       return s.replace(/\S/, function(m) { return m.toUpperCase(); });
     }
 
-
+    public selectLanguage(language):void {
+        this.activeLanguage = language;
+    }
 }

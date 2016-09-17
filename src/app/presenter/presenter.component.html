@@ -8,6 +8,25 @@
           <i class="fa fa-circle live" *ngIf="isRecording"></i>
         </button>
       </div>
+      <div class="language-selector btn-group">
+        <button id="single-button" type="button" class="btn btn-primary" (click)="toggleDropdown($event)">
+          Choose Language <span class="caret"></span>
+        </button>
+
+        <div class="btn-group" dropdown>
+          <button id="single-button" type="button" class="btn btn-primary" dropdownToggle [disabled]="disabled">
+            Choose Language <span class="caret"></span>
+          </button>
+          <ul dropdownMenu role="menu" aria-labelledby="single-button">
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('en')" href="javascript:void(0);">English (live)</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('de')" href="javascript:void(0);">German</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('fr')" href="javascript:void(0);">French</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('es')" href="javascript:void(0);">Spanish</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('it')" href="javascript:void(0);">Italian</a></li>
+          </ul>
+        </div>
+
+      </div>
       <div class="text-overlay">
         <span class="flag-icon flag-icon-gr"></span>
         <span class="final" [innerHTML]="text.final" [hidden]="text.final.length === 0"></span>

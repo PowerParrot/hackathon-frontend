@@ -3,7 +3,7 @@
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
     "mousetrap": "registry:dt/mousetrap#1.5.0+20160501152135",
-    "node": "registry:dt/node#4.0.0+20160509154515",
+    "node": "registry:env/node#6.0.0+20160723033700",
     "require": "github:DefinitelyTyped/DefinitelyTyped/requirejs/require.d.ts",
     "socket.io-client": "registry:dt/socket.io-client#1.4.4+20160317120654"
   },
