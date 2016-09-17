@@ -1,11 +1,6 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12 text-center upload">
-
-        <h1>Upload your Slides:</h1>
-
-        <hr>
-
         <div class="upload-block">
         <input class="input-document"
           id="file"
@@ -16,10 +11,12 @@
           accept="application/pdf">
 
           <label *ngIf="uploader.getNotUploadedItems().length == 0" for="file">
-            <button type="button" class="btn btn-lg btn-primary">Upload your PDF</button>
+            <button type="button" class="btn btn-lg btn-primary">
+              Choose your PDF
+            </button>
           </label>
           <button type="button" class="btn btn-lg btn-success" (click)="upload()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">
-            PDF ready to upload
+            Upload!
           </button>
           <button *ngIf="uploader.progress >= 1" type="button" class="btn btn-lg btn-primary" disabled>
             <i class="fa fa-circle-o fa-spin"></i> {{ uploader.progress }}%

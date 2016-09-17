@@ -1,11 +1,18 @@
-<div class="container-fluid full-width">
-  <pdf-viewer *ngIf="documentPath" #pdfViewer [src]="'http://localhost:5000' + documentPath" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
-  <div class="record-overlay">
-    <button class="btn btn-primary" (click)="record()"><i class="fa fa-microphone"></i></button>
-  </div>
-  <div class="text-overlay">
-    <span class="final" [innerHTML]="text.final" [hidden]="text.final.length === 0"></span>
-    <br>
-    <span class="interim" [innerHTML]="text.interim" [hidden]="text.interim.length === 0"></span>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <pdf-viewer *ngIf="documentPath" #pdfViewer [src]="'http://localhost:5000' + documentPath" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
+      <div class="record-overlay">
+        <button class="btn btn-lg btn-primary btn-round" (click)="record()">
+          <i class="fa fa-microphone" *ngIf="!isRecording"></i>
+          <i class="fa fa-circle live" *ngIf="isRecording"></i>
+        </button>
+      </div>
+      <div class="text-overlay">
+        <span class="final" [innerHTML]="text.final" [hidden]="text.final.length === 0"></span>
+        <br>
+        <span class="interim" [innerHTML]="text.interim" [hidden]="text.interim.length === 0"></span>
+      </div>
+    </div>
   </div>
 </div>

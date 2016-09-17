@@ -18,6 +18,8 @@ export class PresenterComponent {
     presentationId: string;
     documentPath: string;
 
+    isRecording: boolean = false;
+
     previous() {
         if (this.page <= 1) this.page = 1;
         else this.page--;
@@ -61,6 +63,8 @@ export class PresenterComponent {
 
         var recognition = new webkitSpeechRecognition();
 
+        this.isRecording = true;
+
         recognition.continuous = true;
         recognition.interimResults = true;
 
@@ -103,6 +107,7 @@ export class PresenterComponent {
         };
 
         recognition.onend = () => {
+          this.isRecording = false;
           console.log('stream over');
         };
 

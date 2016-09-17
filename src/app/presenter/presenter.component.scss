@@ -1,7 +1,28 @@
+@import '../../style/_variables';
+
 .btn-round {
-  border-radius: 20px;
+  border-radius: 48px;
+  width: 48px;
+  height: 48px;
+  background-color: rgb(50, 50, 50);
+  border: none;
 }
 
+.btn-round:hover {
+  background-color: $brand-primary;
+}
+
+// live blinking shizzle
+.live {
+  color: $brand-danger;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0.0; }
+}
+
+// pdfjs
 .ng2-pdf-viewer-container {
   canvas {
     height: 100%;

@@ -106,8 +106,10 @@ export class PdfViewerComponent {
         this.removeAllChildNodes(container);
       }
       container.appendChild(canvas);
+
       canvas.height = viewport.height;
       canvas.width = viewport.width;
+
       page.render({
         canvasContext: canvas.getContext('2d'),
         viewport: viewport

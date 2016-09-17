@@ -12,6 +12,12 @@ $fa-font-path: "~font-awesome/fonts/";
 @import url(http://fonts.googleapis.com/css?family=Roboto|Open+Sans:400italic,700italic,400,700);
 $roboto: 'Roboto', serif;
 
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(25, 25, 25);
+}
+
 body {
   font-family: $roboto;
 }
