@@ -1,9 +1,9 @@
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'pdf-viewer',
   template: `
-      <div class="ng2-pdf-viewer-container"></div>
+      <div (window:resize)="onResize($event)" class="ng2-pdf-viewer-container"></div>
   `,
   styles: [require('./pdf-viewer.component.scss')],
 })
@@ -16,6 +16,7 @@ export class PdfViewerComponent {
   private _pdf: any;
   private _page: number = 1;
   private _numPages: number = 1;
+  private _canvas: HTMLCanvasElement;
 
   constructor(private element: ElementRef) {
 
@@ -51,6 +52,12 @@ export class PdfViewerComponent {
       this.fn();
     }
   }
+
+  @HostListener('window:resize', ['$event'])
+  public onResize(event) {
+    this.renderPage(this._page);
+  }
+
   public previous() {
     if (this.isValidPageNumber(this._page - 1)) {
       this._page = this._page - 1;
@@ -96,24 +103,34 @@ export class PdfViewerComponent {
 
   private renderPage(page: number) {
     return this._pdf.getPage(page).then((page: any) => {
+
       let viewport = page.getViewport(1);
       let container = this.element.nativeElement.querySelector('div.ng2-pdf-viewer-container');
-      let canvas: HTMLCanvasElement = document.createElement('canvas');
+      this._canvas = document.createElement('canvas');
+
       if (!this._originalSize) {
         viewport = page.getViewport(this.element.nativeElement.offsetWidth / viewport.width);
       }
+
       if (!this._showAll) {
         this.removeAllChildNodes(container);
       }
-      container.appendChild(canvas);
 
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+      container.appendChild(this._canvas);
+
+      console.log(window.innerHeight);
+
+      let width = (window.innerWidth / window.innerHeight);
+      console.log(width);
+
+      this._canvas.height = window.innerHeight;
+      this._canvas.width = (window.innerHeight * (16/9));
 
       page.render({
-        canvasContext: canvas.getContext('2d'),
+        canvasContext: this._canvas.getContext('2d'),
         viewport: viewport
       });
+
     });
   }
 

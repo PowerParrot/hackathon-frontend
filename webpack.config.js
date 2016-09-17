@@ -169,6 +169,12 @@ module.exports = function makeWebpackConfig() {
             'process.env': {
                 ENV: JSON.stringify(ENV)
             }
+        }),
+
+        new webpack.DefinePlugin({
+            'config': {
+              API_URL: JSON.stringify(process.env.API_URL)
+            }
         })
     ];
 

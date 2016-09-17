@@ -21,6 +21,7 @@ export class PresenterComponent {
     activeLanguage: string = 'en';
 
     isRecording: boolean = false;
+    recognition: any;
 
     previous() {
         if (this.page <= 1) this.page = 1;
@@ -60,16 +61,22 @@ export class PresenterComponent {
     }
 
     record() {
+
+      if (this.isRecording) {
+        this.isRecording = false;
+        return this.recognition.stop();
+      }
+
       if (!('webkitSpeechRecognition' in window)) {
         console.log('not supported');
       } else {
 
-        var recognition = new webkitSpeechRecognition();
+        this.recognition = new webkitSpeechRecognition();
 
         this.isRecording = true;
 
-        recognition.continuous = true;
-        recognition.interimResults = true;
+        this.recognition.continuous = true;
+        this.recognition.interimResults = true;
 
         this._socketService.listen(this.presentationId, (msg) => {
           this._ngZone.run(() => {
@@ -84,11 +91,11 @@ export class PresenterComponent {
           });
         });
 
-        recognition.onstart = () => {
+        this.recognition.onstart = () => {
           console.log('start');
         };
 
-        recognition.onresult = (event) => {
+        this.recognition.onresult = (event) => {
           console.log('result');
 
           let final_transcript = '';
@@ -110,17 +117,17 @@ export class PresenterComponent {
 
         };
 
-        recognition.onerror = (event) => {
+        this.recognition.onerror = (event) => {
           console.log(event);
         };
 
-        recognition.onend = () => {
+        this.recognition.onend = () => {
           this.isRecording = false;
           console.log('stream over');
         };
 
-        recognition.lang = 'en-US';
-        recognition.start();
+        this.recognition.lang = 'en-US';
+        this.recognition.start();
       }
     }
 
