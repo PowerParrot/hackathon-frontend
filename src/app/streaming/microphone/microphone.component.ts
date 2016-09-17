@@ -18,8 +18,45 @@ export class MicrophoneInputComponent {
     }
 
     record() {
+
+      if (!('webkitSpeechRecognition' in window)) {
+        console.log('not supported');
+      } else {
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+          console.log('start');
+        };
+
+        recognition.onresult = (event) => {
+          let final_transcript = '';
+
+          for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+              final_transcript += event.results[i][0].transcript;
+            }
+          }
+
+          this.text = final_transcript;
+        };
+
+        recognition.onerror = (event) => {
+
+        };
+
+        recognition.onend = () => {
+
+        };
+
+        recognition.lang = 'en-GB';
+        recognition.start();
+      }
+      
+      /*
       let micOptions = {
-        bufferSize: 2048
+        bufferSize: 8192
       };
 
       this._socket.write('init', {});
@@ -33,11 +70,12 @@ export class MicrophoneInputComponent {
       this._socket.listen('message', (msg) => {
         this.text = msg.data;
       })
+      */
 
     }
 
     stop() {
-      this._microphone.stop();
+      // this._microphone.stop();
     }
 
 }

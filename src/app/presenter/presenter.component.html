@@ -1,9 +1,10 @@
 <div class="container-fluid" (window:keyright)="right($event)" (window:keyleft)="left($event)">
+  <button class="btn btn-primary" (click)="record()">Record My Text</button>
     <div class="row">
       <div class="col-xs-12">
         <pdf-viewer #pdfViewer [src]="'/example.pdf'" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
         <div class="text-overlay">
-          <span>{{ currentText }}</span>
+          <span>{{ currentText.text }}</span>
         </div>
       </div>
     </div>
