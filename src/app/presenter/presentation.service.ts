@@ -12,6 +12,4 @@ export class PresentationService {
       console.log(this.configs.API_URL);
     }
 
-
-
 }
