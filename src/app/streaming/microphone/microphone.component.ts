@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { StreamingService } from './../streaming.service';
+import { SocketService } from './../../shared/socket.service';
+
 let Microphone = require('./Microphone.js');
 
 @Component({
@@ -9,8 +11,9 @@ let Microphone = require('./Microphone.js');
 export class MicrophoneInputComponent {
 
     private _microphone: any;
+    private text: string;
 
-    constructor(private _streamingService: StreamingService) {
+    constructor(private _streamingService: StreamingService, private _socket: SocketService) {
 
     }
 
@@ -19,11 +22,17 @@ export class MicrophoneInputComponent {
         bufferSize: 16384
       };
 
+      this._socket.write('init', null);
+
       this._microphone = new Microphone(micOptions);
       this._microphone.record();
       this._microphone.onAudio = (blob) => {
         this._streamingService.send(blob);
       };
+
+      this._socket.listen('message', (msg) => {
+        this.text = msg.data;
+      })
 
     }
 

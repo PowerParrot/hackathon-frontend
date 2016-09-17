@@ -10,13 +10,19 @@ export class SocketService {
 
     constructor(private _config: ConfigService) {
         this.socket = io(this._config.API_URL);
-        this.socket.on('connect', function(){
+        this.socket.on('connect', () => {
           console.log('connect')
         });
     }
 
     write(event: string, blob: Blob) {
       this.socket.emit(event, blob);
+    }
+
+    listen(event: string, handler: Function) {
+      this.socket.on(event, (msg) => {
+        handler(msg);
+      });
     }
 
 }
