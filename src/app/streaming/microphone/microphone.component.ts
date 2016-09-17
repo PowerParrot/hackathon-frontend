@@ -21,7 +21,7 @@ export class MicrophoneInputComponent {
 
       this._microphone = new Microphone(micOptions);
       this._microphone.record();
-      this._microphone.onAudio = function(blob) {
+      this._microphone.onAudio = (blob) => {
         this._streamingService.send(blob);
       };
 
