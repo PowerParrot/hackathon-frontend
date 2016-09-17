@@ -17,7 +17,8 @@ export class PresenterComponent {
     page: number = 1;
     presentationId: string;
     documentPath: string;
-    activeLanguage: string;
+
+    activeLanguage: string = 'en';
 
     isRecording: boolean = false;
 
@@ -37,9 +38,9 @@ export class PresenterComponent {
     @HostListener('document:keyup', ['$event'])
     handleKeyboardEvent(kbdEvent: KeyboardEvent) {
         if(kbdEvent.keyCode == 37) {
-            this.previous()
+            this.previous();
         } else if (kbdEvent.keyCode == 39) {
-            this.next()
+            this.next();
         }
     }
 
@@ -49,7 +50,6 @@ export class PresenterComponent {
 
     ngOnInit() {
       this._route.params.subscribe(params => {
-          console.log(params['id']);
           this.presentationId = params['id'];
           this.getDocumentURL(this.presentationId).subscribe(result => this.documentPath = result.url);
       });
@@ -73,8 +73,13 @@ export class PresenterComponent {
 
         this._socketService.listen(this.presentationId, (msg) => {
           this._ngZone.run(() => {
-            console.log(msg);
-            this.text.final = this.linebreak(msg.speech);
+
+            if (this.activeLanguage !== 'en') {
+              this.text.final = this.linebreak(msg.translations[this.activeLanguage].translations[0].translatedText)
+            } else {
+              this.text.final = this.linebreak(msg.speech);
+            }
+
             this.page = msg.current_page;
           });
         });
@@ -128,6 +133,6 @@ export class PresenterComponent {
     }
 
     public selectLanguage(language):void {
-        this.activeLanguage = language;
+      this.activeLanguage = language;
     }
 }
