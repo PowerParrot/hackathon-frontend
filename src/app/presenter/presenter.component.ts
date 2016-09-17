@@ -96,8 +96,13 @@ export class PresenterComponent {
           this._ngZone.run(() => {
 
             if (this.activeLanguage !== 'en') {
+              if (msg.translations
+                && msg.translations[this.activeLanguage]
+                && msg.translations[this.activeLanguage].translations
+                && msg.translations[this.activeLanguage].translations.length > 0) {
               this.text.final = this.linebreak(msg.translations[this.activeLanguage].translations[0].translatedText)
-            } else {
+              }
+            } else if (msg.speech) {
               this.text.final = this.linebreak(msg.speech);
             }
 
