@@ -1,11 +1,9 @@
-<div class="container-fluid" (window:keyright)="right($event)" (window:keyleft)="left($event)">
-  <button class="btn btn-primary" (click)="record()">Record My Text</button>
-    <div class="row">
-      <div class="col-xs-12">
-        <pdf-viewer #pdfViewer [src]="'/example.pdf'" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
-        <div class="text-overlay">
-          <span>{{ currentText.text }}</span>
-        </div>
-      </div>
-    </div>
+<div class="container-fluid full-width" (window:keyright)="right($event)" (window:keyleft)="left($event)">
+  <pdf-viewer #pdfViewer [src]="'/example.pdf'" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
+  <div class="record-overlay">
+    <button class="btn btn-primary" (click)="record()"><i class="fa fa-microphone"></i></button>
+  </div>
+  <div class="text-overlay">
+    <span>{{ currentText.text }}</span>
+  </div>
 </div>

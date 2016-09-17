@@ -1,6 +1,7 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { PresentationService } from './presentation.service';
 import { SocketService } from './../shared/socket.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     template: require('./presenter.component.html'),
@@ -11,12 +12,20 @@ export class PresenterComponent {
 
     currentText: {text: string}  = {text: "Hi. This is a test and this project is pretty awesome"};
     page: number = 1;
+    presentationId: string;
 
     @ViewChild('pdfViewer') pdfViewer: any;
 
-    constructor(private _presentationService: PresentationService, private _socketService: SocketService, private _ngZone: NgZone) {
+    constructor(private _route: ActivatedRoute, private _presentationService: PresentationService, private _socketService: SocketService, private _ngZone: NgZone) {
 
     }
+
+    ngOnInit() {
+      this._route.params.subscribe(params => {
+          console.log(params['id']);
+          this.presentationId = params['id'];
+      });
+  }
 
     record() {
       if (!('webkitSpeechRecognition' in window)) {
@@ -31,14 +40,12 @@ export class PresenterComponent {
         recognition.onstart = () => {
           console.log('start');
 
-          /*
-          this._socketService.listen('', (msg) => {
+          this._socketService.listen(this.presentationId, (msg) => {
             this._ngZone.run(() => {
               this.currentText.text = msg.speech;
               this.page = msg.current_page;
             });
           });
-          */
 
         };
 
@@ -58,7 +65,7 @@ export class PresenterComponent {
             this.currentText.text = final_transcript;
           });
 
-          this._socketService.write('note', { current_page: this.page, speech: final_transcript });
+          this._socketService.write('note', { current_page: this.page, speech: final_transcript, presentation_id: this.presentationId });
 
         };
 

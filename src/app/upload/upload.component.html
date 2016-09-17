@@ -18,7 +18,7 @@
           <label *ngIf="uploader.getNotUploadedItems().length == 0" for="file">
             <button type="button" class="btn btn-lg btn-primary">Upload your PDF</button>
           </label>
-          <button type="button" class="btn btn-lg btn-success" (click)="uploader.uploadAll()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">
+          <button type="button" class="btn btn-lg btn-success" (click)="upload()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">
             PDF ready to upload
           </button>
           <button *ngIf="uploader.progress >= 1" type="button" class="btn btn-lg btn-primary" disabled>

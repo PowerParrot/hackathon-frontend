@@ -9,10 +9,10 @@ export class SocketService {
     private socket;
 
     constructor(private _config: ConfigService) {
-        this.socket = io(this._config.API_URL);
-        this.socket.on('connect', () => {
-          console.log('connect')
-        });
+      this.socket = io(this._config.API_URL);
+      this.socket.on('connect', () => {
+        console.log('connect')
+      });
     }
 
     write(event: string, data: any) {
