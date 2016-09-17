@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload';
+import { ConfigService } from '../shared/config.service';
 
 @Component({
     template: require('./upload.component.html'),
@@ -7,23 +9,10 @@ import { Component } from '@angular/core';
 
 export class UploadComponent {
 
-    private options: any = {
-      url: 'http://localhost:5000/upload',
-      filterExtensions: true,
-      allowedExtensions: ['application/pdf'],
-      calculateSpeed: true
-    }
+    public uploader: FileUploader;
 
-    private progress: number = 0;
-    private response: any = {};
-
-    constructor() {
-
-    }
-
-    handleUpload(data: any): void {
-      this.response = data;
-      this.progress = Math.floor(data.progress.percent / 100);
+    constructor(private _configService: ConfigService) {
+      this.uploader = new FileUploader({url: this._configService.API_URL + '/upload', removeAfterUpload: true});
     }
 
 }

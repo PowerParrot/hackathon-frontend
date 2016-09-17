@@ -15,8 +15,8 @@ export class SocketService {
         });
     }
 
-    write(event: string, blob: Blob) {
-      this.socket.emit(event, blob);
+    write(event: string, data: any) {
+      this.socket.emit(event, data);
     }
 
     listen(event: string, handler: Function) {

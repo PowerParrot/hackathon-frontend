@@ -19,10 +19,10 @@ export class MicrophoneInputComponent {
 
     record() {
       let micOptions = {
-        bufferSize: 16384
+        bufferSize: 2048
       };
 
-      this._socket.write('init', null);
+      this._socket.write('init', {});
 
       this._microphone = new Microphone(micOptions);
       this._microphone.record();

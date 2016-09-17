@@ -2,7 +2,25 @@
     <div class="row">
       <div class="col-xs-12">
         <h1>PDF Upload</h1>
-        <input type="file" ngFileSelect [options]="options" (onUpload)="handleUpload($event)">
+
+        <input class="input-document"
+          id="file"
+          name="file"
+          type="file"
+          ng2FileSelect
+          [uploader]="uploader"
+          accept="application/pdf">
+
+          <label *ngIf="uploader.getNotUploadedItems().length == 0" for="file">
+            <button type="button" class="btn btn-primary">Dokument hochladen</button>
+          </label>
+          <button type="button" class="btn btn-success" (click)="uploader.uploadAll()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">
+            {{ uploader.getNotUploadedItems().length }} {{ uploader.getNotUploadedItems().length > 1 ? 'Dokumente' : 'Dokument' }} hochladen
+          </button>
+          <button *ngIf="uploader.progress >= 1" type="button" class="btn btn-primary" disabled>
+            <i class="fa fa-circle-o fa-spin"></i> {{ uploader.progress }}%
+          </button>
+
         <hr>
         <a [routerLink]="['/presenter/1337-pdf-id']">PresenterView</a> | <a [routerLink]="['/microphone']">Microphone Stream</a>
       </div>

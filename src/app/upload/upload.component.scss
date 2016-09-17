@@ -1,0 +1,27 @@
+.input-document {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.input-document + label {
+  display: inline-block;
+  background-color: transparent;
+	margin-top: 3px;
+}
+
+.input-document:focus + label,
+.input-document + label:hover {
+  background-color: transparent;
+}
+
+.input-document + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.input-document + label * {
+	pointer-events: none;
+}
