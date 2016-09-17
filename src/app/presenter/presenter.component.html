@@ -2,33 +2,35 @@
   <div class="row">
     <div class="col-xs-12" style="padding-left: 0; padding-right: 0;">
       <pdf-viewer *ngIf="documentPath" #pdfViewer [src]="'http://localhost:5000' + documentPath" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer>
+        <div class="record-overlay pop-in-animation">
+          <button class="btn btn-lg btn-primary btn-round" (click)="record()">
+            <i class="fa fa-microphone" *ngIf="!isRecording"></i>
+            <i class="fa fa-circle live" *ngIf="isRecording"></i>
+          </button>
+        </div>
 
-      <div class="record-overlay pop-in-animation">
-        <button class="btn btn-lg btn-primary btn-round" (click)="record()">
-          <i class="fa fa-microphone" *ngIf="!isRecording"></i>
-          <i class="fa fa-circle live" *ngIf="isRecording"></i>
-        </button>
+        <div class="language-selector pop-in-animation" dropdown>
+          <button id="single-button" type="button" class="btn btn-round btn-primary" dropdownToggle [disabled]="disabled">
+            <img class="img-responsive" [src]="'/img/flags/' + activeLanguage + '.png'" />
+          </button>
+          <ul dropdownMenu role="menu" aria-labelledby="single-button">
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('en')" href="javascript:void(0);">English (live)</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('de')" href="javascript:void(0);">German</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('fr')" href="javascript:void(0);">French</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('es')" href="javascript:void(0);">Spanish</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('it')" href="javascript:void(0);">Italian</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="language-selector pop-in-animation" dropdown>
-        <button id="single-button" type="button" class="btn btn-round btn-primary" dropdownToggle [disabled]="disabled">
-          <img class="img-responsive" [src]="'/img/flags/' + activeLanguage + '.png'" />
-        </button>
-        <ul dropdownMenu role="menu" aria-labelledby="single-button">
-          <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('en')" href="javascript:void(0);">English (live)</a></li>
-          <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('de')" href="javascript:void(0);">German</a></li>
-          <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('fr')" href="javascript:void(0);">French</a></li>
-          <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('es')" href="javascript:void(0);">Spanish</a></li>
-          <li role="menuitem"><a class="dropdown-item" (click)="selectLanguage('it')" href="javascript:void(0);">Italian</a></li>
-        </ul>
-      </div>
-
-      </div>
-      <div class="text-overlay">
+      <div class="text-overlay-final">
         <img [hidden]="text.final.length === 0" [src]="'/img/flags/' + activeLanguage + '.png'" />
         <span class="final" [innerHTML]="text.final" [hidden]="text.final.length === 0"></span>
-        <br>
+      </div>
+
+      <div class="text-overlay-interim">
         <span class="interim" [innerHTML]="text.interim" [hidden]="text.interim.length === 0"></span>
       </div>
+
     </div>
 </div>

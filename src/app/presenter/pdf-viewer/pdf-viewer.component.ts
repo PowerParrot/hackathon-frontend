@@ -118,13 +118,8 @@ export class PdfViewerComponent {
 
       container.appendChild(this._canvas);
 
-      console.log(window.innerHeight);
-
-      let width = (window.innerWidth / window.innerHeight);
-      console.log(width);
-
-      this._canvas.height = window.innerHeight;
-      this._canvas.width = (window.innerHeight * (16/9));
+      this._canvas.height = viewport.height;
+      this._canvas.width = viewport.width;
 
       page.render({
         canvasContext: this._canvas.getContext('2d'),

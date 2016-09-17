@@ -29,7 +29,7 @@
   }
 }
 
-.text-overlay {
+.text-overlay-final, .text-overlay-interim {
   position: absolute;
   bottom: 100px;
   width: 100%;
@@ -44,11 +44,16 @@
     color: white;
   }
 
+}
+
+.text-overlay-interim {
+  bottom: 40px;
+
   .interim {
     font-size: 0.8em;
-    color: $brand-primary;
+    color: white;
+    font-style: italic;
   }
-
 }
 
 .full-width {

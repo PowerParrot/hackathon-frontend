@@ -1,0 +1,120 @@
+.budgie-flap {
+  height: 400px;
+  padding-top: 50px;
+
+  img {
+    position: absolute;
+    width: 350px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
+.infinite {
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.budgie-eye-animated {
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.blink {
+  -webkit-animation-name: blink;
+  animation-name: blink;
+}
+
+@-webkit-keyframes blink {
+  0%, 90%, 100% {
+    visibility: hidden;
+  }
+  91% {
+    visibility: visible;
+  }
+  91.6% {
+    visibility: hidden;
+  }
+}
+
+@keyframes blink {
+  0%, 90%, 100% {
+    visibility: hidden;
+  }
+  91% {
+    visibility: visible;
+  }
+  91.6% {
+    visibility: hidden;
+  }
+}
+
+.budgie-flap-animated {
+  -webkit-animation-duration: 15s;
+  animation-duration: 15s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.flap {
+  -webkit-animation-name: flap;
+  animation-name: flap;
+}
+
+.flap-mid {
+  -webkit-animation-name: flap-mid;
+  animation-name: flap-mid;
+}
+
+@-webkit-keyframes flap {
+  0%, 90%, 100% {
+    visibility: hidden;
+  }
+  91% {
+    visibility: visible;
+  }
+  91.01% {
+    visibility: hidden;
+  }
+}
+
+@keyframes flap {
+  0%, 90%, 100% {
+    visibility: hidden;
+  }
+  91% {
+    visibility: visible;
+  }
+  91.01% {
+    visibility: hidden;
+  }
+}
+
+@-webkit-keyframes flap-mid {
+  0%, 88%, 100% {
+    visibility: hidden;
+  }
+  89% {
+    visibility: visible;
+  }
+  89.01% {
+    visibility: hidden;
+  }
+}
+
+@keyframes flap-mid {
+  0%, 88%, 100% {
+    visibility: hidden;
+  }
+  89% {
+    visibility: visible;
+  }
+  89.01% {
+    visibility: hidden;
+  }
+}

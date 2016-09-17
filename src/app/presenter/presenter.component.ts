@@ -16,7 +16,9 @@ export class PresenterComponent {
     text: {final: string, interim: string}  = {final: '', interim: ''};
     page: number = 1;
     presentationId: string;
+
     documentPath: string;
+    exportedPDF: string;
 
     activeLanguage: string = 'en';
 
@@ -60,10 +62,21 @@ export class PresenterComponent {
       return this._http.get(this._config.API_URL + '/getDocumentPath?presentation_id=' + id).map(res => <this[]> res.json());
     }
 
+    generatePDF(id: string, language: string): Observable<any> {
+      return this._http.get(this._config.API_URL + '/export/' + id + '?language=' + language).map(res => <this[]> res.json());
+    }
+
+    downloadFile(data: any){
+      var blob = new Blob([data], { type: 'application/pdf' });
+      var url = window.URL.createObjectURL(blob);
+      window.open(url);
+    }
+
     record() {
 
       if (this.isRecording) {
         this.isRecording = false;
+        this.generatePDF(this.presentationId, this.activeLanguage).subscribe(result => this.downloadFile(result.url));
         return this.recognition.stop();
       }
 
