@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
+import { PresentationService } from './presentation.service';
 
 @Component({
     template: require('./presenter.component.html'),
@@ -13,7 +14,7 @@ export class PresenterComponent {
 
     @ViewChild('pdfViewer') pdfViewer: any;
 
-    constructor(private _hotkeysService: HotkeysService) {
+    constructor(private _hotkeysService: HotkeysService, private _presentationService: PresentationService) {
       this._hotkeysService.add(new Hotkey(['left'], (event: KeyboardEvent): boolean => {
           this.page--;
           return false;
@@ -24,5 +25,7 @@ export class PresenterComponent {
           return false;
       }));
     }
+
+
 
 }

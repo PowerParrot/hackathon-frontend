@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HotkeyModule } from 'angular2-hotkeys';
 import { PresenterComponent } from './presenter.component';
+import { PresentationService } from './presentation.service';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 import { routing } from './presenter.routes';
 
@@ -15,6 +16,9 @@ import { routing } from './presenter.routes';
     HotkeyModule,
     ReactiveFormsModule,
     routing
+  ],
+  providers: [
+    PresentationService
   ],
   declarations: [ PresenterComponent, PdfViewerComponent ]
 })

@@ -9,6 +9,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $fa-font-path: "~font-awesome/fonts/";
 @import "font-awesome/scss/font-awesome";
 
+@import url(http://fonts.googleapis.com/css?family=Roboto|Open+Sans:400italic,700italic,400,700);
 $roboto: 'Roboto', serif;
 
 body {

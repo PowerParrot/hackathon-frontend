@@ -3,11 +3,8 @@
       <div class="col-xs-12">
         <h1>PDF Upload</h1>
         <input type="file" ngFileSelect [options]="options" (onUpload)="handleUpload($event)">
-
         <hr>
-
         <a [routerLink]="['/presenter/1337-pdf-id']">PresenterView</a> | <a [routerLink]="['/microphone']">Microphone Stream</a>
-
       </div>
     </div>
 </div>

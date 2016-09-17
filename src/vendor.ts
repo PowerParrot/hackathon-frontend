@@ -9,6 +9,9 @@ import '@angular/router';
 // PDF.js
 import 'pdfjs-dist';
 
+// socket.io
+import 'socket.io-client';
+
 // RxJS
 import 'rxjs';
 
