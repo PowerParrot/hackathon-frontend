@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { PresenterComponent } from './presenter.component';
 import { PresentationService } from './presentation.service';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
+import { DropdownModule } from 'ng2-bootstrap/components/dropdown';
 import { routing } from './presenter.routes';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { routing } from './presenter.routes';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    DropdownModule,
     routing
   ],
   providers: [

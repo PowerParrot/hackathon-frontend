@@ -17,6 +17,7 @@ export class PresenterComponent {
     page: number = 1;
     presentationId: string;
     documentPath: string;
+    activeLanguage: string;
 
     @ViewChild('pdfViewer') pdfViewer: any;
 
@@ -91,5 +92,7 @@ export class PresenterComponent {
       }
     }
 
-
+    public selectLanguage(language):void {
+        this.activeLanguage = language;
+    }
 }
