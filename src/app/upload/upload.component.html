@@ -24,7 +24,7 @@
 
           <label *ngIf="uploader.getNotUploadedItems().length == 0" for="file">
             <button type="button" class="btn btn-lg btn-primary">
-              Choose your PDF
+              Choose your Presentation
             </button>
           </label>
           <button type="button" class="btn btn-lg btn-success" (click)="upload()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">

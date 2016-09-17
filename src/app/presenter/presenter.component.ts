@@ -66,17 +66,18 @@ export class PresenterComponent {
       return this._http.get(this._config.API_URL + '/export/' + id + '?language=' + language).map(res => <this[]> res.json());
     }
 
-    downloadFile(data: any){
-      var blob = new Blob([data], { type: 'application/pdf' });
-      var url = window.URL.createObjectURL(blob);
-      window.open(url);
+    downloadFile(url: any){
+      window.open(this._config.API_URL + url, '_blank');
+    }
+
+    download() {
+      this.generatePDF(this.presentationId, this.activeLanguage).subscribe(result => this.downloadFile(result.url));
     }
 
     record() {
 
       if (this.isRecording) {
         this.isRecording = false;
-        this.generatePDF(this.presentationId, this.activeLanguage).subscribe(result => this.downloadFile(result.url));
         return this.recognition.stop();
       }
 

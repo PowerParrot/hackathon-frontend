@@ -9,6 +9,12 @@
           </button>
         </div>
 
+        <div class="download-overlay pop-in-animation">
+          <button class="btn btn-lg btn-primary btn-round" (click)="download()">
+            <i class="fa fa-download"></i>
+          </button>
+        </div>
+
         <div class="language-selector pop-in-animation" dropdown>
           <button id="single-button" type="button" class="btn btn-round btn-primary" dropdownToggle [disabled]="disabled">
             <img class="img-responsive" [src]="'/img/flags/' + activeLanguage + '.png'" />
