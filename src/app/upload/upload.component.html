@@ -1,8 +1,12 @@
 <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <h1>PDF Upload</h1>
+      <div class="col-xs-12 text-center upload">
 
+        <h1>Upload your Slides:</h1>
+
+        <hr>
+
+        <div class="upload-block">
         <input class="input-document"
           id="file"
           name="file"
@@ -12,17 +16,14 @@
           accept="application/pdf">
 
           <label *ngIf="uploader.getNotUploadedItems().length == 0" for="file">
-            <button type="button" class="btn btn-primary">Dokument hochladen</button>
+            <button type="button" class="btn btn-lg btn-primary">Upload your PDF</button>
           </label>
-          <button type="button" class="btn btn-success" (click)="uploader.uploadAll()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">
-            {{ uploader.getNotUploadedItems().length }} {{ uploader.getNotUploadedItems().length > 1 ? 'Dokumente' : 'Dokument' }} hochladen
+          <button type="button" class="btn btn-lg btn-success" (click)="uploader.uploadAll()" *ngIf="uploader.getNotUploadedItems().length > 0 && uploader.progress == 0">
+            PDF ready to upload
           </button>
-          <button *ngIf="uploader.progress >= 1" type="button" class="btn btn-primary" disabled>
+          <button *ngIf="uploader.progress >= 1" type="button" class="btn btn-lg btn-primary" disabled>
             <i class="fa fa-circle-o fa-spin"></i> {{ uploader.progress }}%
           </button>
-
-        <hr>
-        <a [routerLink]="['/presenter/1337-pdf-id']">PresenterView</a> | <a [routerLink]="['/microphone']">Microphone Stream</a>
       </div>
     </div>
 </div>

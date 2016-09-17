@@ -1,5 +1,6 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { PresentationService } from './presentation.service';
+import { SocketService } from './../shared/socket.service';
 
 @Component({
     template: require('./presenter.component.html'),
@@ -13,7 +14,7 @@ export class PresenterComponent {
 
     @ViewChild('pdfViewer') pdfViewer: any;
 
-    constructor(private _presentationService: PresentationService, private _ngZone: NgZone) {
+    constructor(private _presentationService: PresentationService, private _socketService: SocketService, private _ngZone: NgZone) {
 
     }
 
@@ -21,12 +22,24 @@ export class PresenterComponent {
       if (!('webkitSpeechRecognition' in window)) {
         console.log('not supported');
       } else {
+
         var recognition = new webkitSpeechRecognition();
+
         recognition.continuous = true;
         recognition.interimResults = false;
 
         recognition.onstart = () => {
           console.log('start');
+
+          /*
+          this._socketService.listen('', (msg) => {
+            this._ngZone.run(() => {
+              this.currentText.text = msg.speech;
+              this.page = msg.current_page;
+            });
+          });
+          */
+
         };
 
         recognition.onresult = (event) => {
@@ -40,9 +53,12 @@ export class PresenterComponent {
             }
           }
 
+          // this will move to socket.listen above
           this._ngZone.run(() => {
             this.currentText.text = final_transcript;
           });
+
+          this._socketService.write('note', { current_page: this.page, speech: final_transcript });
 
         };
 
