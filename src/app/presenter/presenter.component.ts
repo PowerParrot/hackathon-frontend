@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild, NgZone, HostListener } from '@angular/core';
 import { Http } from '@angular/http';
 import { PresentationService } from './presentation.service';
 import { SocketService } from './../shared/socket.service';
@@ -18,7 +18,25 @@ export class PresenterComponent {
     presentationId: string;
     documentPath: string;
 
+    previous() {
+        if (this.page <= 1) this.page = 1;
+        else this.page--;
+    }
+
+    next() {
+        this.page++;
+    }
+
     @ViewChild('pdfViewer') pdfViewer: any;
+
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(kbdEvent: KeyboardEvent) {
+        if(kbdEvent.keyCode == 37) {
+            this.previous()
+        } else if (kbdEvent.keyCode == 39) {
+            this.next()
+        }
+    }
 
     constructor(private _config: ConfigService, private _http: Http, private _route: ActivatedRoute, private _presentationService: PresentationService, private _socketService: SocketService, private _ngZone: NgZone) {
 
