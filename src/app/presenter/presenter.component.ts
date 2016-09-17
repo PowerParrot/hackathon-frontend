@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Rx';
 
 export class PresenterComponent {
 
-    currentText: {text: string}  = {text: "Hi. This is a test and this project is pretty awesome"};
+    text: {final: string, interim: string}  = {final: '', interim: ''};
     page: number = 1;
     presentationId: string;
     documentPath: string;
@@ -44,37 +44,39 @@ export class PresenterComponent {
         var recognition = new webkitSpeechRecognition();
 
         recognition.continuous = true;
-        recognition.interimResults = false;
+        recognition.interimResults = true;
+
+        this._socketService.listen(this.presentationId, (msg) => {
+          this._ngZone.run(() => {
+            console.log(msg);
+            this.text.final = this.linebreak(msg.speech);
+            this.page = msg.current_page;
+          });
+        });
 
         recognition.onstart = () => {
           console.log('start');
-
-          this._socketService.listen(this.presentationId, (msg) => {
-            this._ngZone.run(() => {
-              this.currentText.text = msg.speech;
-              this.page = msg.current_page;
-            });
-          });
-
         };
 
         recognition.onresult = (event) => {
           console.log('result');
 
           let final_transcript = '';
+          let interim_transcript = '';
 
           for (var i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
               final_transcript += event.results[i][0].transcript;
+              this._socketService.write('note', { current_page: this.page, speech: final_transcript, presentation_id: this.presentationId });
+            } else {
+              interim_transcript += event.results[i][0].transcript;
             }
           }
 
           // this will move to socket.listen above
           this._ngZone.run(() => {
-            this.currentText.text = final_transcript;
+            this.text.interim = this.linebreak(interim_transcript);
           });
-
-          this._socketService.write('note', { current_page: this.page, speech: final_transcript, presentation_id: this.presentationId });
 
         };
 
@@ -86,9 +88,17 @@ export class PresenterComponent {
           console.log('stream over');
         };
 
-        recognition.lang = 'en-GB';
+        recognition.lang = 'en-US';
         recognition.start();
       }
+    }
+
+    linebreak(s: string) {
+      return s.replace(/\n\n/g, '<p></p>').replace(/\n/g, '<br>');
+    }
+
+    capitalize(s: string) {
+      return s.replace(/\S/, function(m) { return m.toUpperCase(); });
     }
 
 

@@ -4,6 +4,8 @@
     <button class="btn btn-primary" (click)="record()"><i class="fa fa-microphone"></i></button>
   </div>
   <div class="text-overlay">
-    <span>{{ currentText.text }}</span>
+    <span class="final" [innerHTML]="text.final" [hidden]="text.final.length === 0"></span>
+    <br>
+    <span class="interim" [innerHTML]="text.interim" [hidden]="text.interim.length === 0"></span>
   </div>
 </div>

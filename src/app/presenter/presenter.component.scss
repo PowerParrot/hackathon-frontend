@@ -1,14 +1,30 @@
+.btn-round {
+  border-radius: 20px;
+}
+
+.ng2-pdf-viewer-container {
+  canvas {
+    height: 100%;
+  }
+}
+
 .text-overlay {
-  position: relative;
-  bottom: 50px;
+  position: absolute;
+  bottom: 100px;
   width: 100%;
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.6em;
 
   span {
-    padding: 5px;
-    background-color: black;
+    padding: 5px 10px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
+  }
+
+  .interim {
+    font-size: 0.8em;
   }
 
 }
